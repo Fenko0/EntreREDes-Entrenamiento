@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Entreredes Trainer</title>
+
+<style>
+
+body{
+background:#0f2a44;
+color:white;
+font-family:Arial;
+max-width:800px;
+margin:auto;
+padding:20px;
+text-align:center;
+}
+
+button{
+display:block;
+margin:10px auto;
+padding:12px;
+font-size:16px;
+width:250px;
+border-radius:8px;
+border:none;
+cursor:pointer;
+}
+
+.opcion{
+background:white;
+color:black;
+}
+
+.correcta{
+background:#2ecc71 !important;
+color:white;
+}
+
+.incorrecta{
+background:#e74c3c !important;
+color:white;
+}
+
+#siguiente{
+margin-top:20px;
+display:none;
+}
+
+#contadores{
+margin-top:30px;
+font-size:18px;
+}
+
+#barra-container {
+  width: 80%;
+  height: 20px;
+  background: #444;
+  margin: 15px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#barra {
+  height: 100%;
+  width: 0%;
+  background: limegreen;
+  transition: width 0.3s;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<p id="tiempo">Tiempo: 00:00</p>
+
+<p id="racha">Racha: 0 🔥</p>
+
+<h1>Entreredes - Entrenamiento</h1>
+
+<div id="menu"></div>
+
+<div id="modos" style="display:none">
+<h2>Selecciona modo</h2>
+
+<button onclick="iniciarTest(15)">Modo rápido (15)</button>
+<button onclick="iniciarTest(30)">Modo medio (30)</button>
+<button onclick="iniciarTest(50)">Modo difícil (50)</button>
+<button onclick="iniciarTest(75)">Modo estudio (75)</button>
+<button onclick="iniciarTest('all')">Modo completo</button>
+
+</div>
+
+<h2 id="pregunta"></h2>
+
+<div id="opciones"></div>
+
+<button id="siguiente" onclick="siguientePregunta()">Siguiente pregunta</button>
+
+<div id="contadores">
+Respondidas: <span id="respondidas">0</span>/<span id="total">0</span> |
+Correctas: <span id="correctas">0</span> |
+Falladas: <span id="falladas">0</span>
+</div>
+
+<div id="barra-container">
+  <div id="barra"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
