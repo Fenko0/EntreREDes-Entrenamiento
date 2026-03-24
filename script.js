@@ -57,6 +57,9 @@ document.body.appendChild(script)
 
 function iniciarTest(modo){
 
+document.getElementById("testMultiple").style.display = "none";
+document.getElementById("seleccionarTemas").style.display = "none";
+
 iniciarTiempo()
 
 let base = preguntasSeleccionadas.length ? preguntasSeleccionadas : preguntas
@@ -202,6 +205,8 @@ clearInterval(intervalo)
 }
 
 function volverMenu() {
+document.getElementById("seleccionarTemas").style.display = "block";
+document.getElementById("testMultiple").style.display = "block";
 document.getElementById("creditos").style.opacity = "0.8";
   location.reload()
 }
@@ -232,7 +237,7 @@ document.getElementById("testMultiple").style.display = "block";
 
 }
 
-function iniciarTestMultiple() {
+async function iniciarTestMultiple(){
 
 let checks = document.querySelectorAll(".temaCheck:checked");
 
@@ -243,33 +248,30 @@ checks.forEach(c => {
     let boton = c.parentElement.querySelector("button");
 
     if(boton){
-
         let onclick = boton.getAttribute("onclick");
         let ruta = onclick.match(/'(.*?)'/)[1];
-
         temas.push(ruta);
-
     }
 
 });
 
 preguntasSeleccionadas = [];
 
-temas.forEach(tema => {
+for(let tema of temas){
 
-    fetch(tema)
-    .then(r => r.text())
-    .then(code => {
+    let r = await fetch(tema);
+    let code = await r.text();
 
-        eval(code); // carga las preguntas del archivo
+    eval(code);
 
-        preguntasSeleccionadas = preguntasSeleccionadas.concat(preguntas);
+    preguntasSeleccionadas = preguntasSeleccionadas.concat(preguntas);
 
-    });
-
-});
+}
 
 console.log("Preguntas combinadas:", preguntasSeleccionadas);
+
+document.getElementById("modos").style.display = "block";
+document.getElementById("seleccionarTemas").style.display = "none";
 
 }
 
