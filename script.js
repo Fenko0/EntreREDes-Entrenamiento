@@ -10,6 +10,8 @@ let segundos = 0
 let intervalo = null
 let racha = 0
 
+let preguntasSeleccionadas = [];
+
 function toggleMenu(id) {
   let seccion = document.getElementById(id)
   if (seccion.style.display === "none") {
@@ -37,6 +39,8 @@ function iniciarTiempo(){
 
 function cargarTema(ruta){
 
+document.getElementById("creditos").style.opacity = "0";
+
 let script = document.createElement("script")
 script.src = ruta
 
@@ -55,7 +59,8 @@ function iniciarTest(modo){
 
 iniciarTiempo()
 
-let copia = [...preguntas]
+let base = preguntasSeleccionadas.length ? preguntasSeleccionadas : preguntas
+let copia = [...base]
 
 mezclar(copia)
 
@@ -197,9 +202,76 @@ clearInterval(intervalo)
 }
 
 function volverMenu() {
+document.getElementById("creditos").style.opacity = "0.8";
   location.reload()
 }
 
+function activarSeleccion() {
+
+let botones = document.querySelectorAll("#menu button");
+
+botones.forEach(boton => {
+
+    let ruta = boton.getAttribute("onclick");
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "temaCheck";
+
+    let contenedor = document.createElement("div");
+    contenedor.className = "temaSeleccion";
+
+    contenedor.appendChild(boton.cloneNode(true));
+    contenedor.appendChild(checkbox);
+
+    boton.replaceWith(contenedor);
+
+});
+
+document.getElementById("testMultiple").style.display = "block";
+
+}
+
+function iniciarTestMultiple() {
+
+let checks = document.querySelectorAll(".temaCheck:checked");
+
+let temas = [];
+
+checks.forEach(c => {
+
+    let boton = c.parentElement.querySelector("button");
+
+    if(boton){
+
+        let onclick = boton.getAttribute("onclick");
+        let ruta = onclick.match(/'(.*?)'/)[1];
+
+        temas.push(ruta);
+
+    }
+
+});
+
+preguntasSeleccionadas = [];
+
+temas.forEach(tema => {
+
+    fetch(tema)
+    .then(r => r.text())
+    .then(code => {
+
+        eval(code); // carga las preguntas del archivo
+
+        preguntasSeleccionadas = preguntasSeleccionadas.concat(preguntas);
+
+    });
+
+});
+
+console.log("Preguntas combinadas:", preguntasSeleccionadas);
+
+}
 
 function mezclar(array){
 
