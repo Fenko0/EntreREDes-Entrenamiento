@@ -679,4 +679,19 @@ menu.innerHTML = `
 </div>
 
 </div>
+
+<h2 onclick="toggleMenu('Otros')">▶ Extras</h2>
+<div id="Otros" style="display:none;">
+
+<button onclick="cargarTema('Otros/preguntas_cultura.js')">
+Cultura
+</button>
+
+<button onclick="cargarTema('Otros/preguntas_electricidad.js')">
+Electricidad
+</button>
+
+</div>
+
+</div>
 `
