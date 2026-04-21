@@ -37,7 +37,7 @@ function iniciarTiempo(){
   }, 1000)
 }
 
-function cargarTema(ruta){
+function cargarTema(ruta, cantidad){
 
 document.getElementById("creditos").style.opacity = "0";
 
