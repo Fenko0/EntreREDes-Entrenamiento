@@ -184,6 +184,16 @@ document.getElementById("falladas").innerHTML = falladas
 
 document.getElementById("racha").innerHTML = "Racha: " + racha + " 🔥"
 
+let rachaElemento = document.getElementById("racha")
+
+  if(racha < 10){
+    rachaElemento.style.color = "#2ecc71"
+  }else if(racha < 20){
+    rachaElemento.style.color = "#f39c12"
+  }else{
+    rachaElemento.style.color = "#e74c3c"
+  }
+
 let progreso = (respondidas / preguntasTest.length) * 100
 document.getElementById("barra").style.width = progreso + "%"
 
