@@ -186,17 +186,35 @@ document.getElementById("racha").innerHTML = "Racha: " + racha + " 🔥"
 
 let rachaElemento = document.getElementById("racha")
 
-  if(racha < 10){
-    rachaElemento.style.color = "#2ecc71"
-  }else if(racha < 20){
-    rachaElemento.style.color = "#f39c12"
-  }else{
-    rachaElemento.style.color = "#e74c3c"
-  }
+rachaElemento.style.webkitTextFillColor = ""
 
-let progreso = (respondidas / preguntasTest.length) * 100
-document.getElementById("barra").style.width = progreso + "%"
+if(racha < 10){
 
+  rachaElemento.style.color = "#2ecc71"
+  rachaElemento.style.background = "none"
+
+}else if(racha < 20){
+
+  rachaElemento.style.color = "#f39c12"
+  rachaElemento.style.background = "none"
+
+}else if(racha < 50){
+
+  rachaElemento.style.color = "#e74c3c"
+  rachaElemento.style.background = "none"
+
+}else if(racha < 100){
+
+  rachaElemento.style.color = "#9b59b6"
+  rachaElemento.style.background = "none"
+
+}else{
+
+  rachaElemento.style.background =
+  "linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet)"
+
+  rachaElemento.style.webkitBackgroundClip = "text"
+  rachaElemento.style.webkitTextFillColor = "transparent"
 }
 
 function mostrarResultado() {
